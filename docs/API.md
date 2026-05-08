@@ -2,21 +2,20 @@
 
 ## 📋 Visão Geral
 
-Este documento descreve os protocolos de comunicação e interfaces disponíveis para interação com o sistema de ignição e teste estático. O sistema suporta múltiplos protocolos de comunicação para flexibilidade em diferentes cenários de uso.
+Este documento descreve os protocolos de comunicação e as interfaces de controle do sistema de teste estático.
 
 ## 🔌 Protocolos Suportados
 
-| Protocolo  | Tipo     | Velocidade  | Alcance | Caso de Uso          |
-| ---------- | -------- | ----------- | ------- | -------------------- |
-| Serial USB | Fio      | 115200 baud | Local   | Configuração e debug |
-| Bluetooth  | Wireless | 115200 baud | 10m     | Controle remoto      |
+| Protocolo  | Tipo     | Velocidade  | Alcance | Caso de Uso                    |
+| ---------- | -------- | ----------- | ------- | ------------------------------ |
+| Serial USB | Fio      | 115200 baud | Local   | Configuração, calibração, debug |
+| Bluetooth  | Wireless | 115200 baud | ~10 m   | Telemetria/monitoramento       |
 
 ## 💻 Comunicação Serial/Bluetooth
 
-### Configuração da Comunicação
+### Configuração padrão
 
 ```
-// Parâmetros padrão
 BAUD_RATE = 115200
 DATA_BITS = 8
 PARITY = NONE
@@ -24,57 +23,62 @@ STOP_BITS = 1
 FLOW_CONTROL = NONE
 ```
 
-### Estrutura de Comandos
+### Estrutura de comandos
 
 ```
-COMANDO[,PARÂMETRO]*[\n|\r\n]
+COMANDO [PARAMETRO]
 ```
 
 ## 🎮 Comandos Disponíveis
 
-### 1. Modo de Configuração
+### 1. Modo de configuração (calibração)
 
 ```
-# Iniciar modo de calibração
 COMANDO: INIT CONFIG
 RESPOSTA: Aguardando fator de carga...
-USO: Entra no modo de configuração para calibração da célula de carga
+USO: entra no modo de calibração da célula de carga
 
-# Definir fator de carga
 COMANDO: SET LOAD FACTOR <valor>
 EXEMPLO: SET LOAD FACTOR 277306.0
-RESPOSTA: Fator de carga atualizado: 277306.00
-USO: Define o fator de calibração da célula de carga
+RESPOSTA: Fator de carga atualizado
+USO: salva o fator de calibração na memória persistente
 ```
 
-### 2. Controle do Sistema
+### 2. Controle da célula de carga
 
 ```
-# Zerar célula de carga (equivalente ao botão físico)
 COMANDO: TARE
 RESPOSTA: Célula Zerada!
-USO: Realiza o tara da célula de carga
+USO: zera a leitura atual da célula de carga
 ```
 
-## 🎯 Exemplos de Interação
+## 🕹️ Controles Físicos
 
-### Exemplo 1: Calibração da Célula de Carga
+| Entrada física | Pino ESP32 | Função |
+| -------------- | ---------- | ------ |
+| Botão 1 | `GPIO32` | TARE da célula de carga |
+| Botão 2 | `GPIO33` | Iniciar novo arquivo de log no SD |
+| LED | `GPIO4` | Indicador de funcionamento (aceso ao gravar no SD) |
+
+## 🎯 Exemplo de Interação
+
+### Calibração da célula de carga
 
 ```
-# Terminal → ESP32
+# Terminal -> ESP32
 INIT CONFIG
 
-# ESP32 → Terminal
+# ESP32 -> Terminal
 Aguardando fator de carga...
-# (ESP32 começa a enviar leituras RAW)
+# (ESP32 envia leituras RAW continuamente)
 152345
 152348
 152350
 
-# Terminal → ESP32
+# Terminal -> ESP32
 SET LOAD FACTOR 277306.0
 
-# ESP32 → Terminal
+# ESP32 -> Terminal
 Fator de carga atualizado: 277306.00
 Modo configuração finalizado
 ```

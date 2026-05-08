@@ -4,7 +4,7 @@
 
 ### Visão Geral
 
-O firmware implementa um sistema de aquisição de dados em tempo real para testes estáticos de foguetes, com capacidade de processamento, armazenamento e comunicação via Serial/Bluetooth.
+O firmware implementa aquisição contínua de dados para testes estáticos, com leitura da célula de carga e do sensor de pressão, gravação em cartão SD e transmissão de logs via Serial/Bluetooth.
 
 ### Diagrama de Arquitetura
 
@@ -13,9 +13,8 @@ O firmware implementa um sistema de aquisição de dados em tempo real para test
 │   SENSORES      │    │    PROCESSAMENTO │    │     SAÍDAS       │
 │                 │    │                  │    │                  │
 │  Célula Carga   │───▶│   Aquisição      │───▶│  Cartão SD       │
-│  Sensor Pressão │    │   Filtragem      │    │  Serial/BT       │
-│  RTC DS3231     │    │   Timestamp      │    │  Serial/BT       │
-│                 │    │                  │    │                 │
+│  Sensor Pressão │    │   Filtragem      │    │  Serial USB      │
+│                 │    │   Formatação CSV │    │  Bluetooth       │
 └─────────────────┘    └──────────────────┘    └──────────────────┘
          │                        │                        │
          └────────────────────────┼────────────────────────┘
@@ -23,9 +22,9 @@ O firmware implementa um sistema de aquisição de dados em tempo real para test
                          ┌──────────────────┐
                          │   CONTROLE       │
                          │                  │
-                         │  Estados         │
-                         │  Configuração    │
-                         │  Segurança       │
+                         │  Botão TARE      │
+                         │  Novo arquivo    │
+                         │  Estado do LED   │
                          └──────────────────┘
 ```
 
@@ -36,34 +35,30 @@ O firmware implementa um sistema de aquisição de dados em tempo real para test
 ```
 firmware/
 ├── 📄 firmware.ino              # Arquivo principal
-└── 📄 Pressure.h                # Classe sensor pressão
+└── 📄 Pressure.h                # Classe sensor de pressão
 ```
 
 ### Dependências e Bibliotecas
 
 - Wire
-- RTClib
 - HX711
 - FS
 - SD
+- LittleFS
 - SPI
 - Pushbutton
 - BluetoothSerial
 - Preferences
 
-Obs.: as bibliotecas acima precisam estar instaladas no ambiente Arduino/PlatformIO (ex.: RTClib, HX711, Pushbutton).
+Obs.: instale as bibliotecas acima no ambiente Arduino/PlatformIO.
 
 ## 🔧 Configuração e Calibração
 
 ### Preferências Persistentes
 
-O sistema usa a biblioteca Preferences para armazenar configurações na EEPROM
+O sistema usa `Preferences` para salvar o fator de calibração da célula de carga.
 
 ```cpp
-// Chaves de preferência
-const char* PREF_NAMESPACE = "app";
-const char* PREF_LOAD_FACTOR = "loadFactor";
-
 // Carregar configuração
 loadFactor = preferences.getFloat("loadFactor", 277306.0);
 
@@ -73,186 +68,103 @@ preferences.putFloat("loadFactor", loadFactor);
 
 ## 🔄 Fluxo de Execução
 
-1. Inicialização (setup())
+1. Inicialização (`setup()`)
 
 ```cpp
 void setup() {
-    // 1. Comunicação
     Serial.begin(115200);
     SerialBT.begin("ESP32_BT");
 
-    // 2. Configuração persistente
     preferences.begin("app", false);
     loadFactor = preferences.getFloat("loadFactor", 277306.0);
 
-    // 3. Hardware
-    setupRTC();
-    setupSDCard();
-    setupHX711();
-
-    // 4. Sensor de pressão
     pressureSensor.begin();
+
+    setupStorageAndFile();
+    setupHX711();
 }
 ```
 
-2. Loop Principal
+2. Loop principal (`loop()`)
 
 ```cpp
 void loop() {
-    // Coleta contínua de dados
-    staticTest();
+    staticTest();  // coleta e log periódico
 
-    // Tratamento de botão
-    if (button.getSingleDebouncedPress()) {
-        handleButtonPress();
-    }
+    // Botão 1: TARE da célula de carga
+    // Botão 2: iniciar novo arquivo de log
 
-    // Comandos via serial
     if (Serial.available()) {
-        handleSerialCommand();
+        // comandos de calibração e controle
     }
 }
 ```
 
 ## 📊 Aquisição de Dados
 
-### Estrutura de Leitura
-
-```cpp
-struct SensorData {
-    unsigned long timestamp;
-    float thrust;      // Empuxo em Kg
-    float pressureMPa; // Pressão convertida para MPa
-};
-```
-
-### Função de Log de Dados
-
-```cpp
-void logData(unsigned long millis) {
-    float peso = escala.get_units();
-    float pressao = pressureSensor.readMPa();
-
-    // Detecção de valores máximos
-    if (peso > maxValues[0]) maxValues[0] = peso;
-    if (pressao > maxValues[1]) maxValues[1] = pressao;
-
-    // Formatação e armazenamento
-    leitura = String(millis) + "," + String(peso, 6) + "," + String(pressao);
-    appendFile(SD, filedir, leitura);
-
-    // Transmissão é feita via Serial/Bluetooth no printToSerials()
-}
-```
-
-## 🎮 Sistema de Comandos
-
-### Interface Serial/Bluetooth
-
-Os comandos são lidos da Serial USB (Bluetooth apenas espelha logs via `printToSerials`).
-
-### Comandos Disponíveis
-
-| Comando         | Descrição                | Exemplo                    | Resposta            |
-| --------------- | ------------------------ | -------------------------- | ------------------- |
-| INIT CONFIG     | Entra em modo calibração | `INIT CONFIG`              | Aguarda fator       |
-| SET LOAD FACTOR | Define fator de carga    | `SET LOAD FACTOR 277306.0` | Confirmação         |
-| TARE            | Zera célula de carga     | `TARE`                     | Confirmação         |
-| Botão Físico    | Zera célula de carga     | -                          | Beep de confirmação |
-
-## 💾 Sistema de Arquivos
-
-### Estrutura no Cartão SD
-
-```
-/SD_CARD/
-└── 📁 2024-11-15_14-30-25/          # Diretório por data/hora
-   └── 📄 2024-11-15_14-30-25_raw.txt  # Arquivo de dados
-```
-
-### Formato do Arquivo de Dados
+### Estrutura registrada
 
 ```csv
 Tempo,Empuxo,Pressao
-0,0.000000,1850
-100,1.234567,1902
-200,2.345678,1955
-...
+0,0.000000,0.000000
+100,1.234567,1.902000
+200,2.345678,1.955000
 ```
 
-### Funções de Arquivo
+### Processo de log
 
-```cpp
-bool writeFile(fs::FS &fs, String path, String message) {
-    File file = fs.open(path, FILE_WRITE);
-    if (!file) return false;
-    bool success = file.print(message);
-    file.close();
-    return success;
-}
+- Leitura da célula de carga (`HX711`)
+- Leitura do sensor de pressão (`PressureSensor`)
+- Atualização de picos de leitura
+- Escrita no arquivo CSV atual no SD/LittleFS
+- Espelhamento da leitura em Serial/Bluetooth
 
-void appendFile(fs::FS &fs, const String &path, const String &message) {
-    File file = fs.open(path, FILE_APPEND);
-    if (file) {
-        file.print(message + "\n");
-        file.close();
-    }
-}
+## 🎮 Controle do Sistema
+
+### Interface Serial/Bluetooth
+
+Os comandos são recebidos pela Serial USB. A Bluetooth serial espelha mensagens de log/estado.
+
+### Comandos disponíveis
+
+| Comando         | Descrição                | Exemplo                    | Resposta esperada        |
+| --------------- | ------------------------ | -------------------------- | ------------------------ |
+| INIT CONFIG     | Entra em modo calibração | `INIT CONFIG`              | Aguarda fator de carga   |
+| SET LOAD FACTOR | Define fator de carga    | `SET LOAD FACTOR 277306.0` | Fator atualizado         |
+| TARE            | Zera célula de carga     | `TARE`                     | Célula zerada            |
+
+### Entradas físicas
+
+- Botão em `GPIO32`: executa TARE da célula de carga
+- Botão em `GPIO33`: inicia um novo arquivo para continuação do teste
+- LED em `GPIO4`: aceso durante gravação no cartão SD
+
+## 💾 Sistema de Arquivos
+
+### Estratégia de armazenamento
+
+- O firmware tenta inicializar o cartão SD
+- Em falha do SD, usa LittleFS como fallback
+- Arquivos são gerados em sequência (`Dados_001.txt`, `Dados_002.txt`, ...)
+
+### Formato do arquivo de dados
+
+```csv
+Tempo,Empuxo,Pressao
+0,0.000000,0.000000
+100,1.234567,1.902000
 ```
 
 ## 📡 Comunicação
 
-### Bluetooth Serial
-
-```cpp
-BluetoothSerial SerialBT;
-
-void setupBluetooth() {
-    SerialBT.begin("ESP32_BT");
-}
-
-void printToSerials(const String &message) {
-    Serial.println(message);      // USB Serial
-    SerialBT.println(message);    // Bluetooth
-}
-```
-
-## 🎵 Sistema de Feedback
-
-### Controle do Buzzer
-
-```cpp
-void buzzSignal(String signal) {
-    int frequency = 1000;
-
-    if (signal == "Alerta") {
-        // 5 bips rápidos
-        for (int i = 0; i < 5; i++) {
-            tone(BUZZER_PIN, frequency, 200);
-            delay(350);
-        }
-    }
-    else if (signal == "Sucesso") {
-        // 3 bips curtos
-        for (int i = 0; i < 3; i++) {
-            tone(BUZZER_PIN, frequency, 100);
-            delay(200);
-        }
-    }
-    // ... outros sinais
-}
-```
-
-### Estados do LED
-
-- Constante: Gravando dados
-- Apagado: Sistema inativo/erro
+- Serial USB: configuração, calibração e debug
+- Bluetooth: espelhamento de leituras/estado
 
 ## 🚀 Compilação e Upload
 
 ### Arduino IDE
 
-1. Selecione a placa "ESP32 Dev Module"
-2. Configure a porta COM
-3. Defina as opções de partição (se necessário)
-4. Faça o upload
+1. Selecione a placa `ESP32 Dev Module`
+2. Configure a porta serial correta
+3. Verifique as bibliotecas instaladas
+4. Compile e faça upload

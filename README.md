@@ -5,7 +5,7 @@
 
 ## 📋 Sobre
 
-Sistema embarcado baseado em ESP32 para controle e monitoramento de testes estáticos de motores de foguetes, com aquisição de dados de empuxo e pressão em tempo real, armazenamento em cartão SD e comunicação via Serial/Bluetooth.
+Sistema embarcado baseado em ESP32 para monitoramento de testes estáticos de motores de foguetes, com aquisição de dados de empuxo e pressão em tempo real, armazenamento em cartão SD e comunicação via Serial/Bluetooth.
 
 ## 🚀 Quick Start
 
@@ -26,12 +26,12 @@ git clone https://github.com/ViniciusCMB/thrust-stand.git
 ├── 📂 firmware/          # Código do microcontrolador ESP32
 ├── 📂 hardware/          # Esquemáticos, PCBs e lista de componentes
 ├── 📂 software/          # Ferramentas de análise e interface
-└── 📂 test/              # Testes unitários e de integração
+└── 📂 tests/             # Testes unitários e de integração
 ```
 
 ## 🔧 Pré-requisitos
 
-- Hardware: ESP32, Célula de carga, Conversor HX711, Sensor de pressão, RTC DS3231, Leitor Micro SD Card.
+- Hardware: ESP32 DevKit V1, célula de carga + HX711, sensor de pressão (com divisor resistivo), módulo microSD (SPI), 2 botões tácteis (`GPIO32` para TARE e `GPIO33` para novo arquivo), LED com resistor de limitação
 - Software: Arduino IDE 2.0+
 - Bibliotecas: ver `docs/FIRMWARE.md`
 
@@ -45,10 +45,11 @@ git clone https://github.com/ViniciusCMB/thrust-stand.git
 ## 🎯 Funcionalidades
 
 - ✅ Aquisição de dados de empuxo e pressão em tempo real
-- ✅ Armazenamento em cartão SD com timestamp
+- ✅ Armazenamento em cartão SD com arquivos sequenciais
+- ✅ Controle local por botões (TARE e novo arquivo)
+- ✅ LED de status de gravação no SD
 - ✅ Comunicação (Serial, Bluetooth)
-- ✅ Calibração persistente de sensores
-- ✅ Feedback visual e audível
+- ✅ Calibração persistente da célula de carga
 
 ## 🤝 Contribuindo
 
