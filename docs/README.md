@@ -1,61 +1,50 @@
 # 📚 Documentação Técnica - Sistema de Teste Estático
 
-Esta documentação está organizada para fornecer todas as informações necessárias para entender, utilizar e contribuir com o projeto.
+Esta documentação reúne o necessário para montagem, calibração, operação e troubleshooting do sistema baseado em ESP32.
 
 ## 🗂️ Estrutura da Documentação
 
 ### 1. Guia de Instalação
 
 - Requisitos de hardware e software
-- Configuração passo a passo do ambiente
-- Primeira execução e verificação
-- Solução de problemas de instalação
+- Configuração do ambiente
+- Primeira execução
 
-### 2. Documentação de [Hardware](./HARDWARE.md)
+### 2. [Hardware](./HARDWARE.md)
 
-- Lista completa de componentes (BOM)
-- Esquemáticos e diagramas de conexão
-- Especificações técnicas dos sensores
+- Lista de componentes (BOM)
+- Mapeamento de pinos e conexões
+- Função dos botões e do LED
 
-### 3. Documentação de [Firmware](./FIRMWARE.md)
+### 3. [Firmware](./FIRMWARE.md)
 
-- Arquitetura do sistema e fluxo de dados
-- Configuração e calibração
-- Protocolos de comunicação
-
-### 4. Protocolos
-
-- Comandos via Serial/Bluetooth
-- Estrutura de dados e mensagens
-- Formato dos arquivos de log
-
-### 5. Procedimentos de Calibração
-
+- Arquitetura e fluxo de aquisição
 - Calibração da célula de carga
-- Ajuste do sensor de pressão
-- Configuração do RTC
-- Validação dos sensores
+- Sistema de arquivos e armazenamento
 
-### 6. Guia de Troubleshooting
+### 4. [API e Protocolos](./API.md)
 
-- Problemas comuns e soluções
-- Diagnóstico de falhas
-- Procedimentos de recovery
-- Logs e depuração
+- Comandos seriais
+- Controles físicos
+- Exemplos de interação
+
+### 5. [Troubleshooting](./TROUBLESHOOTING.md)
+
+- Problemas comuns e diagnóstico rápido
+- Procedimentos de correção
 
 ## 📊 Diagramas Técnicos
 
-Arquitetura do Sistema
+Arquitetura do sistema:
 
 ```
-[Sensores] → [ESP32] → [Armazenamento] → [Comunicação]
-    ↓           ↓           ↓               ↓
-Célula Carga  Process.   Cartão SD      Serial/BT
-Sensor Press.  Dados     Estrutura      Monitoramento
-    RTC        Filtro    Timestamp      Monitoramento
+[Sensores] -> [ESP32] -> [Armazenamento] -> [Comunicação]
+    |            |             |               |
+ Célula/HX711  Process.      microSD        Serial/BT
+ Pressão       Dados         Arquivo CSV    Monitoramento
 ```
 
-Fluxo de dados
+Fluxo de dados:
 
 ```mermaid
 graph TD;
@@ -66,8 +55,6 @@ graph TD;
     D --> F[Arquivo CSV];
     E --> G[Serial];
     E --> H[Bluetooth];
-    
-
 ```
 
 ## 🛠️ Recursos Técnicos
@@ -75,23 +62,22 @@ graph TD;
 ### Especificações do Sistema
 
 - Microcontrolador: ESP32
-- Sensores: Célula de carga + HX711, Sensor de pressão, RTC DS3231
-- Armazenamento: Cartão SD (FAT32) + Módulo leitor
-- Comunicação: Serial, Bluetooth
-- Alimentação: 5V DC
-- Consumo: ~150mA em operação
+- Sensores: célula de carga (HX711) e sensor de pressão analógico
+- Armazenamento: cartão SD (SPI), com fallback para LittleFS
+- Comunicação: Serial USB e Bluetooth
+- Controles físicos:
+  - Botão `GPIO32`: TARE
+  - Botão `GPIO33`: iniciar novo arquivo
+  - LED `GPIO4`: aceso durante gravação no SD
 
 ### Formatos de Dados
 
-- Logs: CSV com timestamp
-- Configuração: Preferences (EEPROM)
-- Comunicação: Strings delimitadas
-- Armazenamento: Estrutura hierárquica por data/hora
+- Logs: CSV (`Tempo,Empuxo,Pressao`)
+- Configuração: `Preferences` (fator de calibração)
+- Comunicação: comandos por texto
 
 ## 🤝 Contribuindo para a Documentação
 
-1. Encontrou algum erro ou tem sugestões de melhoria
-2. Reporte Issues: Abra uma issue no GitHub descrevendo o problema
-3. Sugira Melhorias: Proponha novas seções ou conteúdos
-4. Envie Correções: Pull requests são bem-vindos
-5. Compartilhe Experiências: Casos de uso e exemplos práticos
+1. Reporte inconsistências encontradas
+2. Proponha melhorias de texto e organização
+3. Abra PR com correções objetivas

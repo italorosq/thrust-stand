@@ -2,174 +2,122 @@
 
 ## 📋 Visão Geral
 
-Este documento fornece soluções para problemas comuns encontrados durante a instalação, configuração e operação do sistema de ignição e teste estático.
+Guia rápido para diagnosticar falhas de alimentação, gravação no SD, leitura de sensores e controle por botões.
 
 ## 🔍 Diagnóstico Rápido
 
-### LEDs Indicadores
+### LED de funcionamento (`GPIO4`)
 
-| Estado do LED    | Significado     | Ação                  |
-| ---------------- | --------------- | --------------------- |
-| 🔵 LED constante | Gravando dados  | Operação normal       |
-| 🔴 Apagado       | Erro no sistema | Verificar alimentação |
+| Estado do LED | Significado | Ação |
+| ------------- | ----------- | ---- |
+| Aceso | Sistema gravando no SD | Operação normal |
+| Apagado durante gravação esperada | Sem escrita no arquivo atual | Verificar SD e fluxo de gravação |
 
-### Sinais do Buzzer
+### Botões físicos
 
-| Padrão Sonoro     | Significado | Ação               |
-| ----------------- | ----------- | ------------------ |
-| 🎵 3 bips curtos  | Sucesso     | Operação normal    |
-| 🚨 5 bips rápidos | Alerta/Erro | Verificar sensores |
+| Botão | Pino | Função esperada |
+| ----- | ---- | --------------- |
+| Botão 1 | `GPIO32` | TARE da célula de carga |
+| Botão 2 | `GPIO33` | Iniciar novo arquivo no SD |
 
 ## 🚨 Problemas Comuns e Soluções
 
-### 1. 🔌 Problemas de Alimentação
+### 1. 🔌 Problemas de alimentação
 
-Sintomas
+Sintomas:
 
 - Sistema não liga
 - Reinicializações aleatórias
-- Leituras instáveis dos sensores
+- Leituras instáveis
 
-Soluções
-
-```bash
-# Verificar tensão de alimentação
-1. Medir 3.3V no pino VCC do ESP32
-2. Verificar se > 3.2V sob carga
-3. Verificar corrente > 500mA disponível
-
-# Soluções:
-✅ Usar fonte 5V 2A dedicada
-✅ Verificar cabos USB (evitar extensões longas)
-✅ Adicionar capacitor 1000μF na alimentação
-✅ Verificar regulador 3.3V do ESP32
-```
-
-### 2. 💾 Problemas com Cartão SD
-
-Sintomas
-
-- "Falha no SD" no boot
-- "Cartão SD não encontrado"
-- Erros ao escrever arquivos
-  Soluções
+Soluções:
 
 ```
-# Diagnóstico:
-1. Verificar formatação (deve ser FAT32)
-2. Verificar tamanho (recomendado ≤ 32GB)
-3. Testar cartão em outro dispositivo
-4. Verificar pino CS (GPIO 5)
-
-# Comandos de diagnóstico:
-LIST FILES          # Lista arquivos no SD
-STATUS              # Verifica status do SD
-
-# Soluções:
-✅ Reformatar cartão como FAT32
-✅ Usar cartão de marca confiável (SanDisk, Kingston)
-✅ Limpar contatos do leitor SD
-✅ Verificar solda do módulo SD
+1. Medir 5V em VIN e 3.3V no ESP32
+2. Confirmar fonte com corrente suficiente (>= 2A recomendado)
+3. Testar com outro cabo USB/fonte
+4. Confirmar GND comum entre todos os módulos
 ```
 
-### 3. ⚖️ Problemas com Célula de Carga
+### 2. 💾 Problemas com cartão SD
 
-Sintomas
+Sintomas:
 
-- Leituras instáveis ou zeradas
-- "HX711 não conectado"
-- Valores fora do esperado
-  Soluções
+- Falha ao iniciar armazenamento
+- Arquivo não é criado
+- LED não acende quando deveria gravar
 
-```
-# Diagnóstico:
-1. Verificar conexões DT (GPIO 26) e SCK (GPIO 27)
-2. Verificar alimentação 3.3V do HX711
-3. Testar com peso conhecido
-
-# Comandos de diagnóstico:
-TARE                # Zerar célula
-
-# Procedimento de calibração:
-1. INIT CONFIG
-2. Anotar leituras RAW com peso conhecido
-3. Calcular: fator = leitura_raw / peso_kg
-4. SET LOAD FACTOR <valor_calculado>
-
-# Soluções:
-✅ Verificar fixação mecânica da célula
-✅ Afastar fontes de interferência elétrica
-✅ Usar cabos blindados para conexões
-✅ Verificar ground comum
-```
-
-### 4. 📡 Problemas de Comunicação
-
-Serial/Bluetooth Não Conecta
+Soluções:
 
 ```
-# Diagnóstico Serial:
-1. Verificar porta COM no Gerenciador de Dispositivos
-2. Verificar baud rate (115200)
-3. Testar com outro cabo USB
-4. Verificar drivers CP210x/CH340
-
-# Diagnóstico Bluetooth:
-1. Verificar se ESP32_BT aparece na lista
-2. Tentar pairing com PIN 1234
-3. Verificar distância (< 10m)
-4. Reiniciar dispositivo Bluetooth
-
-# Soluções:
-✅ Instalar drivers USB-ESP32 mais recentes
-✅ Usar terminal serial confiável (PuTTY, Arduino Serial Monitor)
-✅ Resetar pairing Bluetooth
+1. Verificar formatação FAT32
+2. Verificar conexões SPI: CS(5), MOSI(23), MISO(19), SCK(18)
+3. Testar outro cartão SD
+4. Verificar alimentação e GND do módulo SD
 ```
 
-### 5. 🕐 Problemas com RTC (Relógio)
+### 3. ⚖️ Problemas com célula de carga / HX711
 
-Sintomas
+Sintomas:
 
-- Data/hora incorretas
-- "DS3231 não encontrado"
-- Horas resetam após desligar
+- Leitura travada em valor fixo
+- Leitura muito ruidosa
+- TARE não zera
 
-Soluções
-
-```
-# Diagnóstico:
-1. Verificar bateria CR2032 (≥ 3V)
-2. Verificar conexões I2C (SDA GPIO 21, SCL GPIO 22)
-
-# Soluções:
-✅ Substituir bateria CR2032
-✅ Verificar solda do módulo RTC
-✅ Resetar RTC: desconectar bateria por 10 segundos
-```
-
-### 6. 📊 Problemas com Sensor de Pressão
-
-Sintomas
-
-- Leituras constantes em 0 ou 4095
-- Valores fora da faixa esperada
-- Ruído excessivo nas leituras
-
-Soluções
+Soluções:
 
 ```
-# Diagnóstico:
-1. Verificar alimentação 5V do sensor
-2. Verificar divisor resistivo (R1=2.2kΩ, R2=3.3kΩ)
-3. Medir tensão no pino GPIO 35 (deve ser 0-3.3V)
+1. Verificar DT(GPIO26) e SCK(GPIO27)
+2. Verificar ligação da célula no HX711
+3. Executar TARE pelo botão GPIO32 e por comando serial (TARE)
+4. Repetir calibração com peso conhecido
+```
 
-# Cálculo do divisor:
-Vout = Vsensor * (R2 / (R1 + R2))
-Vout_max = 4.5V * (3300 / (2200 + 3300)) = 2.7V ✅
+### 4. 📊 Problemas com sensor de pressão
 
-# Soluções:
-✅ Verificar valores dos resistores
-✅ Adicionar capacitor 100nF no pino ADC
-✅ Verificar conexão de ground
-✅ Usar fonte estável 5V para o sensor
+Sintomas:
+
+- Leitura em 0 constante
+- Saturação em valor máximo
+- Oscilação elevada
+
+Soluções:
+
+```
+1. Verificar alimentação do sensor
+2. Verificar divisor resistivo (2.2kΩ e 3.3kΩ)
+3. Medir tensão no GPIO35 (faixa esperada: 0-3.3V)
+4. Conferir GND comum entre sensor e ESP32
+```
+
+### 5. 🎛️ Problemas nos botões
+
+Sintomas:
+
+- Botão de TARE não responde
+- Botão de novo arquivo não cria novo log
+
+Soluções:
+
+```
+1. Conferir ligação dos botões para GND
+2. Conferir pinos corretos: GPIO32 (TARE), GPIO33 (novo arquivo)
+3. Verificar mau contato no botão/chicote
+4. Testar acionamento com monitor serial aberto
+```
+
+### 6. 📡 Problemas de comunicação Serial/Bluetooth
+
+Sintomas:
+
+- Sem dados no terminal serial
+- Bluetooth não encontra o dispositivo
+
+Soluções:
+
+```
+1. Confirmar baud rate 115200
+2. Testar outro cabo USB
+3. Confirmar porta serial correta
+4. Reiniciar ESP32 e reconectar Bluetooth
 ```
