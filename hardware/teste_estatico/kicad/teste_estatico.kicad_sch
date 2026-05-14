@@ -1093,6 +1093,166 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "PCM_SL_Pin_Headers:PINHD_1x1_Female"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "PINHD_1x1_Female"
+				(at 0 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x01_P2.54mm_Vertical"
+				(at 2.54 8.89 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Pin Header female with pin space 2.54mm. Pin Count -1"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "Pin Header"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "PinSocket_1x01_P2.54mm*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "PINHD_1x1_Female_0_1"
+				(rectangle
+					(start -1.27 1.27)
+					(end 1.905 -1.27)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 0) (xy -0.508 0)
+					)
+					(stroke
+						(width 0.25)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0.508) (xy 1.016 0.508)
+					)
+					(stroke
+						(width 0.25)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start -0.508 0)
+					(mid -0.3592 0.3592)
+					(end 0 0.508)
+					(stroke
+						(width 0.25)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 -0.508)
+					(mid -0.3592 -0.3592)
+					(end -0.508 0)
+					(stroke
+						(width 0.25)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -0.508) (xy 1.016 -0.508)
+					)
+					(stroke
+						(width 0.25)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "PINHD_1x1_Female_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "PCM_SL_Pin_Headers:PINHD_1x3_Female"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -1803,556 +1963,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "PCM_SL_Pin_Headers:PINHD_1x6_Female"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "J"
-				(at 0 12.7 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "PINHD_1x6_Female"
-				(at 0 10.16 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x06_P2.54mm_Vertical"
-				(at 2.54 15.24 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 12.7 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Pin Header female with pin space 2.54mm. Pin Count -6"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "Pin Header"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "PinSocket_1x06_P2.54mm*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "PINHD_1x6_Female_0_1"
-				(rectangle
-					(start -1.27 7.62)
-					(end 1.905 -7.62)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.27 6.35) (xy -0.508 6.35)
-					)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.27 3.81) (xy -0.508 3.81)
-					)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.27 1.27) (xy -0.508 1.27)
-					)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.27 -1.27) (xy -0.508 -1.27)
-					)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.27 -3.81) (xy -0.508 -3.81)
-					)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.27 -6.35) (xy -0.508 -6.35)
-					)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 6.858) (xy 1.016 6.858)
-					)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start -0.508 6.35)
-					(mid -0.3592 6.7092)
-					(end 0 6.858)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 0 5.842)
-					(mid -0.3592 5.9908)
-					(end -0.508 6.35)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 5.842) (xy 1.016 5.842)
-					)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 4.318) (xy 1.016 4.318)
-					)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start -0.508 3.81)
-					(mid -0.3592 4.1692)
-					(end 0 4.318)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 0 3.302)
-					(mid -0.3592 3.4508)
-					(end -0.508 3.81)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 3.302) (xy 1.016 3.302)
-					)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 1.778) (xy 1.016 1.778)
-					)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start -0.508 1.27)
-					(mid -0.3592 1.6292)
-					(end 0 1.778)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 0 0.762)
-					(mid -0.3592 0.9108)
-					(end -0.508 1.27)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0.762) (xy 1.016 0.762)
-					)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 -0.762) (xy 1.016 -0.762)
-					)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start -0.508 -1.27)
-					(mid -0.3592 -0.9108)
-					(end 0 -0.762)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 0 -1.778)
-					(mid -0.3592 -1.6292)
-					(end -0.508 -1.27)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 -1.778) (xy 1.016 -1.778)
-					)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 -3.302) (xy 1.016 -3.302)
-					)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start -0.508 -3.81)
-					(mid -0.3592 -3.4508)
-					(end 0 -3.302)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 0 -4.318)
-					(mid -0.3592 -4.1692)
-					(end -0.508 -3.81)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 -4.318) (xy 1.016 -4.318)
-					)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 -5.842) (xy 1.016 -5.842)
-					)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start -0.508 -6.35)
-					(mid -0.3592 -5.9908)
-					(end 0 -5.842)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 0 -6.858)
-					(mid -0.3592 -6.7092)
-					(end -0.508 -6.35)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 -6.858) (xy 1.016 -6.858)
-					)
-					(stroke
-						(width 0.25)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "PINHD_1x6_Female_1_1"
-				(pin passive line
-					(at -3.81 6.35 0)
-					(length 2.54)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -3.81 3.81 0)
-					(length 2.54)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -3.81 1.27 0)
-					(length 2.54)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -3.81 -1.27 0)
-					(length 2.54)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -3.81 -3.81 0)
-					(length 2.54)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -3.81 -6.35 0)
-					(length 2.54)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 	)
 	(text "DADOS\n"
 		(exclude_from_sim no)
@@ -2376,7 +1986,7 @@
 	)
 	(text "SCK\n"
 		(exclude_from_sim no)
-		(at 217.17 90.932 0)
+		(at 218.44 94.742 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2406,7 +2016,7 @@
 	)
 	(text "CK\n"
 		(exclude_from_sim no)
-		(at 217.678 93.726 0)
+		(at 219.71 101.346 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2436,7 +2046,7 @@
 	)
 	(text "VCC"
 		(exclude_from_sim no)
-		(at 216.916 82.55 0)
+		(at 217.17 82.042 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2446,7 +2056,7 @@
 	)
 	(text "MOSI\n"
 		(exclude_from_sim no)
-		(at 217.17 88.392 0)
+		(at 218.186 90.678 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2533,6 +2143,12 @@
 		(uuid "c86a6054-5844-47e4-8687-a29e404d5483")
 	)
 	(junction
+		(at 163.83 118.11)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e702bb6c-22c3-43b1-8dcb-12bfcd07acb9")
+	)
+	(junction
 		(at 125.73 96.52)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2600,7 +2216,7 @@
 	)
 	(wire
 		(pts
-			(xy 213.36 83.82) (xy 219.71 83.82)
+			(xy 213.36 86.36) (xy 220.98 86.36)
 		)
 		(stroke
 			(width 0)
@@ -2660,7 +2276,7 @@
 	)
 	(wire
 		(pts
-			(xy 219.71 78.74) (xy 212.09 78.74)
+			(xy 220.98 78.74) (xy 212.09 78.74)
 		)
 		(stroke
 			(width 0)
@@ -2720,7 +2336,7 @@
 	)
 	(wire
 		(pts
-			(xy 215.9 88.9) (xy 215.9 128.27)
+			(xy 215.9 95.25) (xy 215.9 128.27)
 		)
 		(stroke
 			(width 0)
@@ -2820,6 +2436,16 @@
 	)
 	(wire
 		(pts
+			(xy 212.09 118.11) (xy 168.91 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "44fe2540-083c-4b47-8aa2-bdf41fde3f4b")
+	)
+	(wire
+		(pts
 			(xy 139.7 146.05) (xy 213.36 146.05)
 		)
 		(stroke
@@ -2870,7 +2496,7 @@
 	)
 	(wire
 		(pts
-			(xy 214.63 86.36) (xy 214.63 142.24)
+			(xy 214.63 91.44) (xy 214.63 142.24)
 		)
 		(stroke
 			(width 0)
@@ -2940,7 +2566,7 @@
 	)
 	(wire
 		(pts
-			(xy 219.71 81.28) (xy 205.74 81.28)
+			(xy 220.98 82.55) (xy 205.74 82.55)
 		)
 		(stroke
 			(width 0)
@@ -3110,6 +2736,36 @@
 	)
 	(wire
 		(pts
+			(xy 168.91 121.92) (xy 163.83 121.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "949fc432-4fa6-4f99-a20f-5f45392dcb7c")
+	)
+	(wire
+		(pts
+			(xy 168.91 118.11) (xy 168.91 121.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a5b83ca-80b7-4d7a-bb37-fd436538fb53")
+	)
+	(wire
+		(pts
+			(xy 163.83 121.92) (xy 163.83 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9d03ce6b-9a61-4a8c-85e8-67f10f2f2374")
+	)
+	(wire
+		(pts
 			(xy 125.73 57.15) (xy 125.73 96.52)
 		)
 		(stroke
@@ -3190,7 +2846,7 @@
 	)
 	(wire
 		(pts
-			(xy 219.71 147.32) (xy 134.62 147.32)
+			(xy 220.98 147.32) (xy 134.62 147.32)
 		)
 		(stroke
 			(width 0)
@@ -3220,16 +2876,6 @@
 	)
 	(wire
 		(pts
-			(xy 212.09 118.11) (xy 166.37 118.11)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ba8ab70d-0499-45db-bb69-1c51ebc86948")
-	)
-	(wire
-		(pts
 			(xy 130.81 119.38) (xy 198.12 119.38)
 		)
 		(stroke
@@ -3250,7 +2896,7 @@
 	)
 	(wire
 		(pts
-			(xy 213.36 146.05) (xy 213.36 83.82)
+			(xy 213.36 146.05) (xy 213.36 86.36)
 		)
 		(stroke
 			(width 0)
@@ -3290,7 +2936,7 @@
 	)
 	(wire
 		(pts
-			(xy 205.74 81.28) (xy 205.74 50.8)
+			(xy 205.74 82.55) (xy 205.74 50.8)
 		)
 		(stroke
 			(width 0)
@@ -3310,7 +2956,7 @@
 	)
 	(wire
 		(pts
-			(xy 219.71 91.44) (xy 219.71 147.32)
+			(xy 220.98 99.06) (xy 220.98 147.32)
 		)
 		(stroke
 			(width 0)
@@ -3350,7 +2996,7 @@
 	)
 	(wire
 		(pts
-			(xy 219.71 86.36) (xy 214.63 86.36)
+			(xy 220.98 91.44) (xy 214.63 91.44)
 		)
 		(stroke
 			(width 0)
@@ -3420,7 +3066,7 @@
 	)
 	(wire
 		(pts
-			(xy 219.71 88.9) (xy 215.9 88.9)
+			(xy 220.98 95.25) (xy 215.9 95.25)
 		)
 		(stroke
 			(width 0)
@@ -3527,6 +3173,73 @@
 		)
 	)
 	(symbol
+		(lib_id "PCM_SL_Pin_Headers:PINHD_1x1_Female")
+		(at 224.79 78.74 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "10f23a1c-e4f2-40c2-b830-665bd5f80286")
+		(property "Reference" "J1"
+			(at 227.33 77.4699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SDK_GND"
+			(at 227.33 80.0099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x01_P2.54mm_Vertical"
+			(at 227.33 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 224.79 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Pin Header female with pin space 2.54mm. Pin Count -1"
+			(at 224.79 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cc98e7bf-fc79-453c-8132-cb285ac20e78")
+		)
+		(instances
+			(project ""
+				(path "/94c7e68b-98a3-4370-a63a-2a25b13895ad"
+					(reference "J1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 106.68 127 90)
 		(unit 1)
@@ -3589,6 +3302,73 @@
 			(project "teste_estatico"
 				(path "/94c7e68b-98a3-4370-a63a-2a25b13895ad"
 					(reference "R220ohn1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "PCM_SL_Pin_Headers:PINHD_1x1_Female")
+		(at 224.79 82.55 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "14713729-2448-4924-b07d-5f87e5a368ff")
+		(property "Reference" "J2"
+			(at 227.33 81.2799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SDK_VCC"
+			(at 227.33 83.8199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x01_P2.54mm_Vertical"
+			(at 227.33 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 224.79 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Pin Header female with pin space 2.54mm. Pin Count -1"
+			(at 224.79 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9859b5d7-db46-4d7a-ad97-9a9df2e6ca95")
+		)
+		(instances
+			(project ""
+				(path "/94c7e68b-98a3-4370-a63a-2a25b13895ad"
+					(reference "J2")
 					(unit 1)
 				)
 			)
@@ -3743,6 +3523,73 @@
 			(project ""
 				(path "/94c7e68b-98a3-4370-a63a-2a25b13895ad"
 					(reference "A1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "PCM_SL_Pin_Headers:PINHD_1x1_Female")
+		(at 224.79 99.06 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "393ea443-a3a7-4bc6-b6ea-5d8667185941")
+		(property "Reference" "J6"
+			(at 227.33 97.7899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SDK_CK"
+			(at 227.33 100.3299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x01_P2.54mm_Vertical"
+			(at 227.33 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 224.79 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Pin Header female with pin space 2.54mm. Pin Count -1"
+			(at 224.79 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "47b76bcd-5834-4367-adff-7d9f8b0933fb")
+		)
+		(instances
+			(project ""
+				(path "/94c7e68b-98a3-4370-a63a-2a25b13895ad"
+					(reference "J6")
 					(unit 1)
 				)
 			)
@@ -3961,6 +3808,73 @@
 		)
 	)
 	(symbol
+		(lib_id "PCM_SL_Pin_Headers:PINHD_1x1_Female")
+		(at 224.79 95.25 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5e8bb946-0e85-4ab8-a64a-3e275fe319b2")
+		(property "Reference" "J5"
+			(at 227.33 93.9799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SDK_SCK"
+			(at 227.33 96.5199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x01_P2.54mm_Vertical"
+			(at 227.33 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 224.79 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Pin Header female with pin space 2.54mm. Pin Count -1"
+			(at 224.79 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "47b76bcd-5834-4367-adff-7d9f8b0933fb")
+		)
+		(instances
+			(project ""
+				(path "/94c7e68b-98a3-4370-a63a-2a25b13895ad"
+					(reference "J5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 135.89 53.34 0)
 		(unit 1)
@@ -4024,6 +3938,73 @@
 			(project "teste_estatico"
 				(path "/94c7e68b-98a3-4370-a63a-2a25b13895ad"
 					(reference "R3.3k1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "PCM_SL_Pin_Headers:PINHD_1x1_Female")
+		(at 224.79 86.36 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a6e51c05-af96-46a5-8a68-f7b05fe89b25")
+		(property "Reference" "J3"
+			(at 227.33 85.0899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SDK_MISO"
+			(at 227.33 87.6299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x01_P2.54mm_Vertical"
+			(at 227.33 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 224.79 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Pin Header female with pin space 2.54mm. Pin Count -1"
+			(at 224.79 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d257374e-d766-4128-90dc-85696c3425f2")
+		)
+		(instances
+			(project ""
+				(path "/94c7e68b-98a3-4370-a63a-2a25b13895ad"
+					(reference "J3")
 					(unit 1)
 				)
 			)
@@ -4107,88 +4088,6 @@
 		)
 	)
 	(symbol
-		(lib_id "PCM_SL_Pin_Headers:PINHD_1x6_Female")
-		(at 223.52 85.09 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "d2956005-9177-42a4-856f-61b7bdfcb196")
-		(property "Reference" "SDCARD1"
-			(at 226.06 83.8199 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "sd card"
-			(at 226.06 86.3599 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x06_P2.54mm_Vertical"
-			(at 226.06 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 223.52 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Pin Header female with pin space 2.54mm. Pin Count -6"
-			(at 223.52 85.09 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "cf2e32c7-3066-4045-b2b1-e1a7c302f610")
-		)
-		(pin "4"
-			(uuid "3e66e522-9112-437d-bf83-9241d8df0495")
-		)
-		(pin "6"
-			(uuid "8814720d-bbdb-45ea-9852-3dd769becd91")
-		)
-		(pin "5"
-			(uuid "3da20456-cb72-4d25-aca4-e5077bf94f2c")
-		)
-		(pin "1"
-			(uuid "14d2c749-09d3-4a84-a9e4-49dea223f170")
-		)
-		(pin "2"
-			(uuid "b4be91e0-1e9c-459d-91ec-d7ca6c673587")
-		)
-		(instances
-			(project ""
-				(path "/94c7e68b-98a3-4370-a63a-2a25b13895ad"
-					(reference "SDCARD1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "PCM_SL_Pin_Headers:PINHD_1x3_Female")
 		(at 113.03 38.1 180)
 		(unit 1)
@@ -4254,6 +4153,73 @@
 			(project ""
 				(path "/94c7e68b-98a3-4370-a63a-2a25b13895ad"
 					(reference "PRESSÃO1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "PCM_SL_Pin_Headers:PINHD_1x1_Female")
+		(at 224.79 91.44 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "de585d04-7ae8-4395-a983-28c4e018b281")
+		(property "Reference" "J4"
+			(at 227.33 90.1699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SDK_MOSI"
+			(at 227.33 92.7099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x01_P2.54mm_Vertical"
+			(at 227.33 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 224.79 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Pin Header female with pin space 2.54mm. Pin Count -1"
+			(at 224.79 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "47b76bcd-5834-4367-adff-7d9f8b0933fb")
+		)
+		(instances
+			(project ""
+				(path "/94c7e68b-98a3-4370-a63a-2a25b13895ad"
+					(reference "J4")
 					(unit 1)
 				)
 			)
