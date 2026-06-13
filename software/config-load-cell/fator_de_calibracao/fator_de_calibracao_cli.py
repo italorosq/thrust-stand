@@ -18,7 +18,7 @@ def try_parse_int(line: str) -> int | None:
     if not s:
         return None
     try:
-        return int(s)
+        return int(float(s))
     except ValueError:
         return None
 
