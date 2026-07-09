@@ -51,6 +51,13 @@ git clone https://github.com/ViniciusCMB/thrust-stand.git
 - ✅ Comunicação (Serial, Bluetooth)
 - ✅ Calibração persistente da célula de carga
 
+## 📊 Dados de Teste
+
+Os dados de testes estáticos de motores específicos são armazenados no repositório dedicado:
+[motor](https://github.com/Serra-Rocketry/motor)
+
+Este repositório (thrust-stand) contém apenas o sistema de aquisição. Os dados coletados durante os testes devem ser commitados no repositório `motor`.
+
 ## 🤝 Contribuindo
 
 Este projeto segue as [Boas Práticas da Serra Rocketry](https://github.com/Serra-Rocketry/best-practices). Para contribuir:

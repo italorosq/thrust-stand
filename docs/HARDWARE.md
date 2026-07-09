@@ -88,7 +88,7 @@ Vout_max = 4.5V * (3300 / (2200 + 3300)) = 2.7V
 
 Montagem completa:
 
-![Esquematico](./Esquematico.png)
+<img src="./Esquematico.png" width="500" alt="Esquemático">
 
 ## ⚠️ Considerações de Projeto
 
