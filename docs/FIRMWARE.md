@@ -131,13 +131,14 @@ Os comandos são recebidos pela Serial USB. A Bluetooth serial espelha mensagens
 | --------------- | ------------------------ | -------------------------- | ------------------------ |
 | INIT CONFIG     | Entra em modo calibração | `INIT CONFIG`              | Aguarda fator de carga   |
 | SET LOAD FACTOR | Define fator de carga    | `SET LOAD FACTOR 277306.0` | Fator atualizado         |
+| GET LOAD FACTOR | Consulta fator atual     | `GET LOAD FACTOR`          | loadFactor atual: valor  |
 | TARE            | Zera célula de carga     | `TARE`                     | Célula zerada            |
 
 ### Entradas físicas
 
-- Botão em `GPIO32`: executa TARE da célula de carga
-- Botão em `GPIO33`: inicia um novo arquivo para continuação do teste
-- LED em `GPIO4`: aceso durante gravação no cartão SD
+- Botão em `GPIO33`: executa TARE da célula de carga
+- LED em `GPIO19`: aceso durante gravação no cartão SD
+- Buzzer em `GPIO32`: sinalização sonora
 
 ## 💾 Sistema de Arquivos
 
