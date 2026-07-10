@@ -66,7 +66,7 @@ void setup()
   SerialBT.begin("ESP32_BT");
 
   preferences.begin("app", false);
-  loadFactor = preferences.getFloat("loadFactor", 277306.0);
+  loadFactor = preferences.getFloat("loadFactor", -284.6);
 
   Serial.println("=== BOOT ===");
   Serial.print("loadFactor carregado: ");

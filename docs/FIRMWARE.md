@@ -60,7 +60,7 @@ O sistema usa `Preferences` para salvar o fator de calibração da célula de ca
 
 ```cpp
 // Carregar configuração
-loadFactor = preferences.getFloat("loadFactor", 277306.0);
+loadFactor = preferences.getFloat("loadFactor", -284.6);
 
 // Salvar configuração
 preferences.putFloat("loadFactor", loadFactor);
@@ -76,7 +76,7 @@ void setup() {
     SerialBT.begin("ESP32_BT");
 
     preferences.begin("app", false);
-    loadFactor = preferences.getFloat("loadFactor", 277306.0);
+    loadFactor = preferences.getFloat("loadFactor", -284.6);
 
     pressureSensor.begin();
 
@@ -130,7 +130,7 @@ Os comandos são recebidos pela Serial USB. A Bluetooth serial espelha mensagens
 | Comando         | Descrição                | Exemplo                    | Resposta esperada        |
 | --------------- | ------------------------ | -------------------------- | ------------------------ |
 | INIT CONFIG     | Entra em modo calibração | `INIT CONFIG`              | Aguarda fator de carga   |
-| SET LOAD FACTOR | Define fator de carga    | `SET LOAD FACTOR 277306.0` | Fator atualizado         |
+| SET LOAD FACTOR | Define fator de carga    | `SET LOAD FACTOR -284.6`   | Fator atualizado         |
 | GET LOAD FACTOR | Consulta fator atual     | `GET LOAD FACTOR`          | loadFactor atual: valor  |
 | TARE            | Zera célula de carga     | `TARE`                     | Célula zerada            |
 

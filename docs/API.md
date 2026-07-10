@@ -39,7 +39,7 @@ RESPOSTA: Aguardando fator de carga...
 USO: entra no modo de calibração da célula de carga
 
 COMANDO: SET LOAD FACTOR <valor>
-EXEMPLO: SET LOAD FACTOR 277306.0
+EXEMPLO: SET LOAD FACTOR -284.6
 RESPOSTA: Fator de carga atualizado
 USO: salva o fator de calibração na memória persistente
 ```
