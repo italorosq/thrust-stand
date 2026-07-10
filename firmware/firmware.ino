@@ -113,58 +113,15 @@ void loop()
   if (Serial.available())
   {
     String command = Serial.readStringUntil('\n');
-    command.trim(); // Remove espaços e quebras de linha
+    command.trim();
+    processCommand(command);
+  }
 
-    if (command.equalsIgnoreCase("TARE"))
-    {
-      buzzSignal("Beep");
-      printToSerials("Célula Zerada!");
-      escala.tare();
-      return;
-    }
-
-    if (command.equalsIgnoreCase("GET LOAD FACTOR"))
-    {
-      printToSerials("loadFactor atual: " + String(loadFactor, 4));
-      return;
-    }
-
-    if (command.startsWith("INIT CONFIG"))
-    {
-      if (escala.is_ready())
-      {
-        escala.tare();
-        configMode = true;
-        Serial.println("Aguardando fator de carga...");
-      }
-      else
-      {
-        printToSerials("HX711 nao pronto. Verifique conexoes.");
-      }
-      return;
-    }
-
-    if (configMode && command.startsWith("SET LOAD FACTOR"))
-    {
-      int lastSpaceIndex = command.lastIndexOf(' ');
-      if (lastSpaceIndex != -1)
-      {
-        String factorStr = command.substring(lastSpaceIndex + 1);
-        float factor = factorStr.toFloat();
-        if (!isnan(factor) && factor != 0.0)
-        {
-          setLoadFactor(factor);
-          configMode = false;
-          Serial.println("Modo configuração finalizado");
-        }
-        else
-        {
-          printToSerials("Valor inválido. Tente novamente.");
-          buzzSignal("Alerta");
-        }
-      }
-      return;
-    }
+  if (SerialBT.available())
+  {
+    String command = SerialBT.readStringUntil('\n');
+    command.trim();
+    processCommand(command);
   }
 
   // Stream de calibração: RAW contínuo enquanto aguarda o fator
@@ -175,6 +132,68 @@ void loop()
       Serial.println(escala.get_value(10));
     }
     delay(100);
+  }
+}
+
+// Processamento de comandos recebidos (Serial ou Bluetooth)
+void processCommand(String command)
+{
+  if (command.equalsIgnoreCase("TARE"))
+  {
+    if (escala.is_ready())
+    {
+      buzzSignal("Beep");
+      printToSerials("Célula Zerada!");
+      escala.tare();
+    }
+    else
+    {
+      printToSerials("HX711 nao pronto, TARE ignorado.");
+    }
+    return;
+  }
+
+  if (command.equalsIgnoreCase("GET LOAD FACTOR"))
+  {
+    printToSerials("loadFactor atual: " + String(loadFactor, 4));
+    return;
+  }
+
+  if (command.startsWith("INIT CONFIG"))
+  {
+    if (escala.is_ready())
+    {
+      escala.tare();
+      configMode = true;
+      printToSerials("Aguardando fator de carga...");
+    }
+    else
+    {
+      printToSerials("HX711 nao pronto. Verifique conexoes.");
+    }
+    return;
+  }
+
+  if (configMode && command.startsWith("SET LOAD FACTOR"))
+  {
+    int lastSpaceIndex = command.lastIndexOf(' ');
+    if (lastSpaceIndex != -1)
+    {
+      String factorStr = command.substring(lastSpaceIndex + 1);
+      float factor = factorStr.toFloat();
+      if (!isnan(factor) && factor != 0.0)
+      {
+        setLoadFactor(factor);
+        configMode = false;
+        printToSerials("Modo configuração finalizado");
+      }
+      else
+      {
+        printToSerials("Valor inválido. Tente novamente.");
+        buzzSignal("Alerta");
+      }
+    }
+    return;
   }
 }
 
