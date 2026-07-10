@@ -69,8 +69,7 @@ void setup()
   loadFactor = preferences.getFloat("loadFactor", -284.6);
 
   Serial.println("=== BOOT ===");
-  Serial.print("loadFactor carregado: ");
-  Serial.println(loadFactor, 4);
+  printToSerials("loadFactor carregado: " + String(loadFactor, 4));
 
   pinMode(LED_PIN, OUTPUT);
   pinMode(BUZZER_PIN, OUTPUT);
@@ -128,8 +127,7 @@ void loop()
 
     if (command.equalsIgnoreCase("GET LOAD FACTOR"))
     {
-      Serial.print("loadFactor atual: ");
-      Serial.println(loadFactor, 4);
+      printToSerials("loadFactor atual: " + String(loadFactor, 4));
       return;
     }
 
