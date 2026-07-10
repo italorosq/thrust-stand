@@ -123,7 +123,7 @@ Tempo,Empuxo,Pressao
 
 ### Interface Serial/Bluetooth
 
-Os comandos são recebidos pela Serial USB. A Bluetooth serial espelha mensagens de log/estado.
+Os comandos podem ser enviados pela Serial USB ou pela Bluetooth Serial. Ambas as interfaces recebem e respondem comandos.
 
 ### Comandos disponíveis
 

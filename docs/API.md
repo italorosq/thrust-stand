@@ -9,7 +9,7 @@ Este documento descreve os protocolos de comunicação e as interfaces de contro
 | Protocolo  | Tipo     | Velocidade  | Alcance | Caso de Uso                    |
 | ---------- | -------- | ----------- | ------- | ------------------------------ |
 | Serial USB | Fio      | 115200 baud | Local   | Configuração, calibração, debug |
-| Bluetooth  | Wireless | 115200 baud | ~10 m   | Telemetria/monitoramento       |
+| Bluetooth  | Wireless | 115200 baud | ~10 m   | Telemetria, comandos, monitoramento |
 
 ## 💻 Comunicação Serial/Bluetooth
 
