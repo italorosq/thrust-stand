@@ -24,6 +24,8 @@
 #define SD_MOSI_PIN 27    // Pino MOSI do cartão SD
 #define INTERVALO 100     // Precisão Leitura Dados milissegundos
 
+SPIClass spiSD(VSPI);
+
 // Sensores analógicos no ESP32 podem variar com atenuação/referência.
 // Ajuste estes parâmetros ao seu hardware real para obter leituras coerentes.
 
@@ -224,7 +226,8 @@ String generateFileName()
 bool setupStorage()
 {
   Serial.println("Inicializando SD...");
-  if (SD.begin(CS_PIN) && SD.cardType() != CARD_NONE)
+  spiSD.begin(SD_SCK_PIN, SD_MISO_PIN, SD_MOSI_PIN, CS_PIN);
+  if (SD.begin(CS_PIN, spiSD) && SD.cardType() != CARD_NONE)
   {
     storageType = STORAGE_SD;
     Serial.println("SD iniciado!");
