@@ -68,6 +68,10 @@ void setup()
   preferences.begin("app", false);
   loadFactor = preferences.getFloat("loadFactor", 277306.0);
 
+  Serial.println("=== BOOT ===");
+  Serial.print("loadFactor carregado: ");
+  Serial.println(loadFactor, 4);
+
   pinMode(LED_PIN, OUTPUT);
   pinMode(BUZZER_PIN, OUTPUT);
   pinMode(BTN_PIN, INPUT);
@@ -112,6 +116,13 @@ void loop()
       buzzSignal("Beep");
       printToSerials("Célula Zerada!");
       escala.tare();
+      return;
+    }
+
+    if (command.equalsIgnoreCase("GET LOAD FACTOR"))
+    {
+      Serial.print("loadFactor atual: ");
+      Serial.println(loadFactor, 4);
       return;
     }
 
