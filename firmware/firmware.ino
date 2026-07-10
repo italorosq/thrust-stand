@@ -1,5 +1,4 @@
 // INCLUSÃO DE BIBLIOTECAS
-#include <Wire.h>
 #include <HX711.h>
 #include <FS.h>
 #include <SD.h>
@@ -40,7 +39,6 @@ const int RESOLUCAO_ADC = 4095;   // ESP32 tem ADC de 12 bits (2^12 - 1)
 const float TENSAO_MAX_ADC = 3.3; // Tensão de referência do ADC do ESP32
 float maxValues[2] = {0.0, 0.0};  // Vetor leituras de pico (peso, pressão)
 unsigned long previousMillis = 0; // Controle de tempo
-bool selectLoop = false;          // Modo de operação
 float loadFactor = 0.0;           // Valor encontrado na calibração
 String filedir = "";              // Arquivo
 String leitura = "";              // Leitura dos dados
@@ -427,19 +425,6 @@ void appendFile(const String &path, const String &message)
     digitalWrite(LED_PIN, LOW);
   }
   file.close();
-}
-
-// Criação de diretório
-void createDir(fs::FS &fs, const String &path)
-{
-  if (fs.mkdir(path))
-  {
-    printToSerials("Dir created");
-  }
-  else
-  {
-    printToSerials("mkdir failed");
-  }
 }
 
 // Função para imprimir na Serial e SerialBT
