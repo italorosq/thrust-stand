@@ -12,13 +12,16 @@
 #include "Pressure.h"
 
 // Definições de pinos e constantes
-#define LED_PIN 4     // Pino do LED
-#define CS_PIN 5      // Pino do cartão SD
-#define BUZZER_PIN 33 // Pino do buzzer
-#define BTN_PIN 32    // Pino do botão
-#define CELULA_DT_PIN 26  // Pino de dados da célula de carga
-#define CELULA_SCK_PIN 27 // Pino de clock da célula de carga
+#define LED_PIN 19        // Pino do LED
+#define CS_PIN 5          // Pino do cartão SD
+#define BUZZER_PIN 32     // Pino do buzzer
+#define BTN_PIN 33        // Pino do botão
+#define CELULA_DT_PIN 4   // Pino de dados da célula de carga
+#define CELULA_SCK_PIN 18 // Pino de clock da célula de carga
 #define PRESSURE_PIN 35   // Pino do sensor de pressão
+#define SD_SCK_PIN 25     // Pino SCK do cartão SD
+#define SD_MISO_PIN 23    // Pino MISO do cartão SD
+#define SD_MOSI_PIN 27    // Pino MOSI do cartão SD
 #define INTERVALO 100     // Precisão Leitura Dados milissegundos
 
 // Sensores analógicos no ESP32 podem variar com atenuação/referência.
@@ -144,7 +147,7 @@ void loop()
   // Stream de calibração: RAW contínuo enquanto aguarda o fator
   if (configMode)
   {
-    Serial.println(escala.get_value(1));
+    Serial.println(escala.get_value(10));
     delay(100);
   }
 }
@@ -292,7 +295,7 @@ bool setupHX711()
 // Formato: Tempo (ms), Empuxo (Kg), Pressão (MPa)
 void logData(unsigned long millis)
 {
-  float peso = escala.get_units();
+  float peso = escala.get_units(10);
   float pressao = pressureSensor.readMPa();
 
   if (peso > maxValues[0])
