@@ -149,7 +149,10 @@ void loop()
   // Stream de calibração: RAW contínuo enquanto aguarda o fator
   if (configMode)
   {
-    Serial.println(escala.get_value(10));
+    if (escala.is_ready())
+    {
+      Serial.println(escala.get_value(10));
+    }
     delay(100);
   }
 }
@@ -315,6 +318,12 @@ bool setupHX711()
 // Formato: Tempo (ms), Empuxo (Kg), Pressão (MPa)
 void logData(unsigned long millis)
 {
+  if (!escala.is_ready())
+  {
+    Serial.println("AVISO: HX711 nao pronto, pulando leitura.");
+    return;
+  }
+
   float peso = escala.get_units(10);
   float pressao = pressureSensor.readMPa();
 
