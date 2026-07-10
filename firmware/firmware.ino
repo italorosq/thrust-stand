@@ -101,9 +101,16 @@ void loop()
 
   if (button.getSingleDebouncedPress())
   {
-    buzzSignal("Beep");
-    printToSerials("Célula Zerada!");
-    escala.tare();
+    if (escala.is_ready())
+    {
+      buzzSignal("Beep");
+      printToSerials("Célula Zerada!");
+      escala.tare();
+    }
+    else
+    {
+      printToSerials("HX711 nao pronto, TARE ignorado.");
+    }
   }
 
   if (Serial.available())
@@ -128,9 +135,16 @@ void loop()
 
     if (command.startsWith("INIT CONFIG"))
     {
-      escala.tare();
-      configMode = true;
-      Serial.println("Aguardando fator de carga...");
+      if (escala.is_ready())
+      {
+        escala.tare();
+        configMode = true;
+        Serial.println("Aguardando fator de carga...");
+      }
+      else
+      {
+        printToSerials("HX711 nao pronto. Verifique conexoes.");
+      }
       return;
     }
 
