@@ -284,10 +284,27 @@ bool setupHX711()
   escala.begin(CELULA_DT_PIN, CELULA_SCK_PIN);
   Serial.println("HX711.begin OK");
 
+  unsigned long timeout = millis();
+  while (!escala.is_ready())
+  {
+    if (millis() - timeout > 5000)
+    {
+      Serial.println("ERRO: HX711 nao respondeu (timeout 5s).");
+      return false;
+    }
+    delay(10);
+  }
+
   escala.set_scale(loadFactor);
   Serial.println("set_scale OK");
 
-  escala.tare();
+  for (int i = 0; i < 10; i++)
+  {
+    escala.get_value(1);
+    delay(100);
+  }
+
+  escala.tare(10);
   Serial.println("tare OK");
 
   printToSerials("HX711 conectado");
