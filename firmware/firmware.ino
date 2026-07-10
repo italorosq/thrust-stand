@@ -98,7 +98,7 @@ void loop()
 
   if (button.getSingleDebouncedPress())
   {
-    if (escala.is_ready())
+    if (escala.wait_ready_timeout(1000))
     {
       buzzSignal("Beep");
       printToSerials("Célula Zerada!");
@@ -127,7 +127,7 @@ void loop()
   // Stream de calibração: RAW contínuo enquanto aguarda o fator
   if (configMode)
   {
-    if (escala.is_ready())
+    if (escala.wait_ready_timeout(1000))
     {
       Serial.println(escala.get_value(10));
     }
@@ -140,7 +140,7 @@ void processCommand(String command)
 {
   if (command.equalsIgnoreCase("TARE"))
   {
-    if (escala.is_ready())
+    if (escala.wait_ready_timeout(1000))
     {
       buzzSignal("Beep");
       printToSerials("Célula Zerada!");
@@ -161,7 +161,7 @@ void processCommand(String command)
 
   if (command.startsWith("INIT CONFIG"))
   {
-    if (escala.is_ready())
+    if (escala.wait_ready_timeout(1000))
     {
       escala.tare();
       configMode = true;
@@ -325,6 +325,7 @@ bool setupHX711()
 {
   Serial.println("Iniciando HX711...");
   escala.begin(CELULA_DT_PIN, CELULA_SCK_PIN);
+  pinMode(CELULA_DT_PIN, INPUT_PULLUP);
   Serial.println("HX711.begin OK");
 
   unsigned long timeout = millis();
@@ -358,9 +359,8 @@ bool setupHX711()
 // Formato: Tempo (ms), Empuxo (Kg), Pressão (MPa)
 void logData(unsigned long millis)
 {
-  if (!escala.is_ready())
+  if (!escala.wait_ready_timeout(200))
   {
-    Serial.println("AVISO: HX711 nao pronto, pulando leitura.");
     return;
   }
 
