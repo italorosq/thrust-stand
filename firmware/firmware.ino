@@ -21,7 +21,7 @@
 #define CELULA_DT_PIN 4   // Pino de dados da célula de carga (DAT)
 #define CELULA_SCK_PIN 18 // Pino de clock da célula de carga (CLK)
 #define PRESSURE_PIN 35   // Pino do sensor de pressão
-#define INTERVALO 500     // Intervalo de leitura em milissegundos
+#define INTERVALO 1       // Intervalo de leitura em milissegundos
 
 // Instância SPI customizada para o SD (SCK=25, MISO=23, MOSI=27, CS=5)
 SPIClass spiSD(VSPI);
@@ -143,7 +143,7 @@ void loop()
   {
     if (escala.wait_ready_timeout(1000))
     {
-      long raw = escala.get_value(5);
+      long raw = escala.get_value(1);
       Serial.println(raw);
       SerialBT.println(raw);
     }
@@ -373,7 +373,7 @@ void logData(unsigned long ms)
     return;
   }
 
-  float peso = escala.get_units(5); // média de 5 amostras
+  float peso = escala.get_units(1); // 1 amostra por leitura
   float pressao = pressureSensor.readMPa();
 
   if (peso > maxValues[0]) maxValues[0] = peso;
