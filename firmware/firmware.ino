@@ -446,7 +446,7 @@ void appendFile(const String &path, const String &message)
   {
     digitalWrite(LED_PIN, HIGH);
   }
-  else
+  else 
   {
     printToSerials("Falha ao gravar linha no arquivo");
     digitalWrite(LED_PIN, LOW);
