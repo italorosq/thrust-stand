@@ -373,7 +373,7 @@ void logData(unsigned long ms)
     return;
   }
 
-  float peso = escala.get_units(1); // 1 amostra por leitura
+  float peso = abs(escala.get_units(1)); // 1 amostra por leitura
   float pressao = pressureSensor.readMPa();
 
   if (peso > maxValues[0]) maxValues[0] = peso;
