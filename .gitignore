@@ -43,3 +43,8 @@ __pycache__/
 *-backups/
 *.kicad_prl
 fp-info-cache
+
+# KiCad: histórico do plugin, locks e backups de restauração
+.history/
+~*.lck
+_restore_backup_*/

@@ -3,9 +3,9 @@
     "GenerationSoftware": {
       "Vendor": "KiCad",
       "Application": "Pcbnew",
-      "Version": "10.0.2"
+      "Version": "10.0.3"
     },
-    "CreationDate": "2026-05-21T14:06:37-03:00"
+    "CreationDate": "2026-07-09T16:47:25-03:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
@@ -14,8 +14,8 @@
       "Revision": "rev?"
     },
     "Size": {
-      "X": 114.55,
-      "Y": 73.55
+      "X": 92.13,
+      "Y": 81.24
     },
     "LayerNumber": 2,
     "BoardThickness": 1.6,
@@ -32,8 +32,8 @@
   ],
   "FilesAttributes": [
     {
-      "Path": "teste_estatico-B_Cu.gbr",
-      "FileFunction": "Copper,L2,Bot",
+      "Path": "teste_estatico-F_Cu.gbr",
+      "FileFunction": "Copper,L1,Top",
       "FilePolarity": "Positive"
     },
     {
