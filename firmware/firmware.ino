@@ -12,19 +12,22 @@
 #include "Pressure.h"
 
 // Definições de pinos e constantes
-#define LED_PIN 19        // Pino do LED
-#define CS_PIN 5          // Pino do cartão SD (CS)
-#define SD_SCK_PIN 25     // Pino SCK do SD
-#define SD_MISO_PIN 23    // Pino MISO do SD
-#define SD_MOSI_PIN 27    // Pino MOSI do SD
-#define BUZZER_PIN 32     // Pino do buzzer
-#define BTN_PIN 33        // Pino do botão
-#define ADS_SCLK_PIN 18   // ADS1256 SCLK (reaproveita a trilha do antigo SCK do HX711)
-#define ADS_DOUT_PIN 4    // ADS1256 DOUT -> MISO (reaproveita a trilha do antigo DT do HX711)
-#define ADS_DIN_PIN 13    // ADS1256 DIN  <- MOSI
-#define ADS_CS_PIN 26     // ADS1256 CS
-#define ADS_DRDY_PIN 34   // ADS1256 DRDY (pino só de entrada)
-#define MAX_CS_PIN 21     // MAX31855 CS (divide SCLK=18 e SO=4 com o ADS1256)
+// Coluna esquerda do DevKit: barramento (ADS1256 + MAX31855 + microSD)
+// Coluna direita: painel (LED, buzzer, botão) e os dois CS que saíram dos pinos de strapping
+// Os três CS levam pull-up de 10 kΩ junto dos conectores (barramento desselecionado no boot)
+#define LED_PIN 25        // LED de gravação (coluna direita)
+#define CS_PIN 19         // microSD CS
+#define SD_SCK_PIN 22     // microSD SCK
+#define SD_MISO_PIN 23    // microSD MISO
+#define SD_MOSI_PIN 21    // microSD MOSI
+#define BUZZER_PIN 32     // Buzzer (coluna direita)
+#define BTN_PIN 33        // Botão TARE (coluna direita)
+#define ADS_SCLK_PIN 17   // ADS1256 SCLK (compartilhado com o MAX31855)
+#define ADS_DOUT_PIN 18   // ADS1256 DOUT -> MISO (compartilhado com o MAX31855)
+#define ADS_DIN_PIN 16    // ADS1256 DIN  <- MOSI
+#define ADS_CS_PIN 13     // ADS1256 CS (fora dos pinos de strapping)
+#define ADS_DRDY_PIN 4    // ADS1256 DRDY (entrada)
+#define MAX_CS_PIN 14     // MAX31855 CS (fora dos pinos de strapping)
 #define TERMOPAR_INTERVALO_MS 125 // MAX31855 leva até 100 ms por conversão
 #define TAXA_AMOSTRAGEM_HZ 500 // Amostras por segundo (empuxo + pressão)
 #define PERIODO_US (1000000UL / TAXA_AMOSTRAGEM_HZ)
@@ -35,10 +38,10 @@
 #define TARE_AMOSTRAS 50  // Leituras usadas na média da tara
 #define NVS_CHAVE_FATOR "fatorADS1256" // Chave do fator de calibração no NVS
 
-// Instância SPI customizada para o SD (SCK=25, MISO=23, MOSI=27, CS=5)
+// Instância SPI customizada para o SD (SCK=22, MISO=23, MOSI=21, CS=19)
 SPIClass spiSD(VSPI);
 
-// Barramento SPI separado para o ADS1256 (SCLK=18, MISO=4, MOSI=13)
+// Barramento SPI separado para o ADS1256 + MAX31855 (SCLK=17, MISO=18, MOSI=16)
 SPIClass spiADC(HSPI);
 
 // Variáveis globais
@@ -144,7 +147,7 @@ void setup()
 
   pinMode(LED_PIN, OUTPUT);
   pinMode(BUZZER_PIN, OUTPUT);
-  pinMode(BTN_PIN, INPUT);
+  pinMode(BTN_PIN, INPUT_PULLUP);
 
   bool adcOk = setupADS1256();
   if (adcOk) setupTermopar(); // opcional: sem termopar o teste continua

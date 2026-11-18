@@ -11,11 +11,11 @@
 
 #include "ADS1256.h" // cópia de firmware/ADS1256.h (mantenha as duas iguais)
 
-#define ADS_SCLK_PIN 18
-#define ADS_DOUT_PIN 4
-#define ADS_DIN_PIN 13
-#define ADS_CS_PIN 26
-#define ADS_DRDY_PIN 34
+#define ADS_SCLK_PIN 17
+#define ADS_DOUT_PIN 18
+#define ADS_DIN_PIN 16
+#define ADS_CS_PIN 13
+#define ADS_DRDY_PIN 4
 #define TARE_AMOSTRAS 50
 #define MEDIA_AMOSTRAS 10 // leituras por valor mostrado (deixa o número mais estável)
 #define NVS_CHAVE_FATOR "fatorADS1256"
