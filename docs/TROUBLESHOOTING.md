@@ -6,7 +6,7 @@ Guia rápido para diagnosticar falhas de alimentação, gravação no SD, leitur
 
 ## 🔍 Diagnóstico Rápido
 
-### LED de funcionamento (`GPIO19`)
+### LED de funcionamento (`GPIO25`)
 
 | Estado do LED | Significado | Ação |
 | ------------- | ----------- | ---- |
@@ -50,7 +50,7 @@ Soluções:
 
 ```
 1. Verificar formatação FAT32
-2. Verificar conexões SPI: CS(5), MOSI(27), MISO(23), SCK(25)
+2. Verificar conexões SPI: CS(19), MOSI(21), MISO(23), SCK(22)
 3. Testar outro cartão SD
 4. Verificar alimentação e GND do módulo SD
 ```
@@ -66,7 +66,7 @@ Sintomas:
 Soluções:
 
 ```
-1. Verificar SCLK(GPIO18), DOUT(GPIO4), DIN(GPIO13), CS(GPIO26) e DRDY(GPIO34)
+1. Verificar SCLK(GPIO17), DOUT(GPIO18), DIN(GPIO16), CS(GPIO13) e DRDY(GPIO4)
 2. Verificar ligação da célula no ADS1256 (S+ em AIN0, S- em AIN1, E- no GND comum)
 3. Executar TARE pelo botão GPIO33 e por comando serial (TARE)
 4. Repetir calibração com peso conhecido
@@ -118,14 +118,14 @@ Códigos de falha:
 | 1 | Termopar desconectado (circuito aberto) |
 | 2 | Termopar em curto com GND |
 | 4 | Termopar em curto com VCC |
-| 128 | O MAX31855 não respondeu (verificar CS no GPIO21, SCK, SO e alimentação 3,3 V) |
+| 128 | O MAX31855 não respondeu (verificar CS no GPIO14, SCK, SO e alimentação 3,3 V) |
 
 Soluções:
 
 ```
 1. Conferir o encaixe do termopar nos bornes T+ / T-
 2. Conferir a polaridade (temperatura caindo ao aquecer = fios invertidos)
-3. Conferir CS(GPIO21), SCK(GPIO18) e SO(GPIO4)
+3. Conferir CS(GPIO14), SCK(GPIO17) e SO(GPIO18)
 4. Termopar não deve encostar em metal ligado ao GND do circuito
 ```
 

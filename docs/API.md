@@ -89,7 +89,7 @@ A temperatura vem como `nan` se o termopar estiver ausente ou com falha.
 | Entrada física | Pino ESP32 | Função |
 | -------------- | ---------- | ------ |
 | Botão TARE | `GPIO33` | TARE da célula de carga |
-| LED | `GPIO19` | Indicador de funcionamento (aceso ao gravar no SD) |
+| LED | `GPIO25` | Indicador de funcionamento (aceso ao gravar no SD) |
 | Buzzer | `GPIO32` | Sinalização sonora |
 
 ## 🎯 Exemplo de Interação

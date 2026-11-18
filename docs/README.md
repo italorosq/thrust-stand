@@ -78,7 +78,7 @@ graph TD;
 - Comunicação: Serial USB e Bluetooth
 - Controles físicos:
   - Botão `GPIO33`: TARE
-  - LED `GPIO19`: aceso durante gravação no SD
+  - LED `GPIO25`: aceso durante gravação no SD
   - Buzzer `GPIO32`: sinalização
 
 ### Formatos de Dados

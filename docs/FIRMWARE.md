@@ -150,7 +150,7 @@ Os comandos podem ser enviados pela Serial USB ou pela Bluetooth Serial. Ambas a
 ### Entradas físicas
 
 - Botão em `GPIO33`: executa TARE da célula de carga
-- LED em `GPIO19`: aceso durante gravação no cartão SD
+- LED em `GPIO25`: aceso durante gravação no cartão SD
 - Buzzer em `GPIO32`: sinalização sonora
 
 ## 💾 Sistema de Arquivos
